@@ -18,9 +18,6 @@ This project demonstrates how to use Terraform to build a simple web application
 4. Run `terraform init` to initialize your Terraform workspace.
 5. Run `terraform apply` to create the resources on AWS.
 
-## Contributing
-
-Please read `CONTRIBUTING.md` for details on our code of conduct, and the process for submitting pull requests.
 
 ## License
 
