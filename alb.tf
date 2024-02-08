@@ -22,7 +22,7 @@ resource "aws_lb" "this" {
   internal           = true
   load_balancer_type = "application"
   security_groups    = [aws_security_group.http_ingress.id]
-  subnets            = [aws_subnet.private_subnet_1.id, aws_subnet.private_subnet_2.id]
+  subnets            = [aws_subnet.private_sn_1.id, aws_subnet.private_sn_2.id]
     tags = {
     Name = "webserver-load-balancer"
   }
