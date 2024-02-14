@@ -1,16 +1,16 @@
 #  create launch template
 resource "aws_launch_template" "this" {
   name_prefix            = "tf-alb-asg"
-  image_id               = "ami-0cf10cdf9fcd62d37"
+  image_id               = "ami-0323d48d3a525fd18"
   instance_type          = "t2.micro"
-  key_name               = "default-ue1"
+  key_name               = "default-eu1"
 #   iam_instance_profile {
 #     name = ""
 #   }
   
-  vpc_security_group_ids = [aws_security_group.alb_ingress.id]
-#   user_data            = filebase64("${path.module}/webserver.sh")
-  user_data              =  "IyEvYmluL2Jhc2gNCnN1ZG8geXVtIHVwZGF0ZSAteQ0Kc3VkbyB5dW0gaW5zdGFsbCAteSBodHRwZA0Kc3VkbyBzeXN0ZW1jdGwgc3RhcnQgaHR0cGQNCnN1ZG8gc3lzdGVtY3RsIGVuYWJsZSBodHRwZA0Kc3VkbyB1c2VybW9kIC1hIC1HIGFwYWNoZSBlYzItdXNlcg0Kc3VkbyBjaG93biAtUiBlYzItdXNlcjphcGFjaGUgL3Zhci93d3cNCnN1ZG8gY2htb2QgMjc3NSAvdmFyL3d3dw0Kc3VkbyBmaW5kIC92YXIvd3d3IC10eXBlIGQgLWV4ZWMgY2htb2QgMjc3NSB7fSBcOw0Kc3VkbyBmaW5kIC92YXIvd3d3IC10eXBlIGYgLWV4ZWMgY2htb2QgMDY2NCB7fSBcOw0Kc3VkbyBlY2hvICI8P3BocCBwaHBpbmZvKCk7ID8+IiA+IC92YXIvd3d3L2h0bWwvcGhwaW5mby5waHA="
+  vpc_security_group_ids = [aws_security_group.webserver_sg.id]
+#   user_data = base64encode(file("webserver.sh")) 
+  user_data = filebase64("${path.module}/webserver.sh")
   monitoring {
     enabled = true
   }

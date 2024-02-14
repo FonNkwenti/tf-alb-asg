@@ -4,6 +4,11 @@ resource "aws_lb_target_group" "this" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = aws_vpc.this.id
+  target_type = "instance"
+
+    target_health_state {
+    enable_unhealthy_connection_termination = false
+  }
     
   health_check {
     path                = "/"
@@ -19,10 +24,11 @@ resource "aws_lb_target_group" "this" {
 # create alb
 resource "aws_lb" "this" {
   name               = "alb"
-  internal           = true
+  internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.http_ingress.id]
-  subnets            = [aws_subnet.private_sn_az1.id, aws_subnet.private_sn_az2.id]
+  security_groups    = [aws_security_group.alb_sg.id]
+  subnets            = [aws_subnet.public_sn_az1.id, aws_subnet.public_sn_az2.id]
+#   subnets            = [aws_subnet.private_sn_az1.id, aws_subnet.private_sn_az2.id]
     tags = {
     Name = "webserver-load-balancer"
   }
