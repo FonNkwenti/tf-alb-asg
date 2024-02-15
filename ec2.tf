@@ -9,13 +9,10 @@ resource "aws_instance" "jumphost" {
   iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.name
   user_data_replace_on_change = true
   user_data = base64encode(file("webserver.sh")) 
-#   user_data_base64 = 
   tags = {
     Name = "jumphost"
   }
 }
-
-
 
 output "jumphost_private_ip" {
   value = aws_instance.jumphost.private_ip

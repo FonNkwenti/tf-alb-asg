@@ -27,8 +27,8 @@ resource "aws_lb" "this" {
   internal           = true
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
-  # subnets            = [aws_subnet.public_sn_az1.id, aws_subnet.public_sn_az2.id]
-  subnets            = [aws_subnet.private_sn_az1.id, aws_subnet.private_sn_az2.id]
+  # subnets            = [aws_subnet.public_sn_az1.id, aws_subnet.public_sn_az2.id] # for internet facing ALB
+  subnets            = [aws_subnet.private_sn_az1.id, aws_subnet.private_sn_az2.id] # for internal ALB
   enable_cross_zone_load_balancing = true
     tags = {
     Name = "webserver-load-balancer"

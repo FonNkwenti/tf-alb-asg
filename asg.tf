@@ -4,12 +4,8 @@ resource "aws_launch_template" "this" {
   image_id               = "ami-0323d48d3a525fd18"
   instance_type          = "t2.micro"
   key_name               = "default-eu1"
-#   iam_instance_profile {
-#     name = ""
-#   }
-  
+
   vpc_security_group_ids = [aws_security_group.webserver_sg.id]
-#   user_data = base64encode(file("webserver.sh")) 
   user_data = filebase64("${path.module}/webserver.sh")
   monitoring {
     enabled = true
@@ -44,7 +40,6 @@ resource "aws_autoscaling_group" "this" {
 resource "aws_autoscaling_policy" "cpu_scaling_policy" {
   name                   = "cpu-scaling-policy"
   policy_type            = "TargetTrackingScaling"
-#   estimated_instance_warmup = var.instance_warmup_time
   autoscaling_group_name = aws_autoscaling_group.this.name
 
   target_tracking_configuration {
