@@ -77,15 +77,15 @@ resource "aws_subnet" "public_sn_az1" {
     Name = "public-sn-az1"
   }
 }
-# resource "aws_subnet" "public_sn_az2" {
-#   vpc_id = aws_vpc.this.id
-#   cidr_block = "10.0.0.128/26" 
-#   map_public_ip_on_launch = true
-#   availability_zone = data.aws_availability_zones.available.names[1]
-#   tags = {
-#     Name = "public-sn-az2"
-#   }
-# }
+resource "aws_subnet" "public_sn_az2" {
+  vpc_id = aws_vpc.this.id
+  cidr_block = "10.0.0.128/26" 
+  map_public_ip_on_launch = true
+  availability_zone = data.aws_availability_zones.available.names[1]
+  tags = {
+    Name = "public-sn-az2"
+  }
+}
 
 
 resource "aws_route_table" "public_rt" {
